@@ -36,4 +36,5 @@
 **Limitations**
 - Handle only .gz file.
 - For `role_arn` only env or config file is the way to give default user access, it doesn’t work in logstash conf.
+- **tcplog** receiver `max_log_size` has to be adjusted according to the allowed limit of logs, can be difficult to come to a number as logs spans across files. 
   
