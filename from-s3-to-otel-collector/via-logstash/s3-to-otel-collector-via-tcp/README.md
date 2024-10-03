@@ -2,6 +2,7 @@
 
 **Problem Statement**
 - There are logs stored on s3 in json format and gz compression, want to ship these logs to any otel compatible backend without any **formatting** of data
+  and with minimum resource consumption on node/pod(one running Logstash) side.
   
 **Flow**
 
