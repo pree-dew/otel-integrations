@@ -1,0 +1,34 @@
+version: '3'
+services:
+  logstash:
+    container_name: logstash
+    image: docker.elastic.co/logstash/logstash:8.15.1
+    command: ["-f", "/usr/share/logstash/pipeline/logstash.conf"]
+    volumes:
+      - /tmp/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    environment:
+      ROLE_ARN: "your-role-arn"
+      AWS_REGION: "aws-region"
+      AWS_BUCKET: "your-bucket-name"
+      AWS_ACCESS_KEY_ID: "your-access-key"
+      AWS_SECRET_ACCESS_KEY: "your-secret-access-key"
+    networks:
+      - otel_network
+    depends_on:
+      - otel-collector
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    container_name: otel-collector
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    ports:
+      - "4318:4318"
+    volumes:
+      - ./otel-collector-config.yml:/etc/otel-collector-config.yaml
+    networks:
+      - otel_network
+
+networks:
+  otel_network:
+    driver: bridge
+
