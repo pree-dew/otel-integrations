@@ -7,11 +7,16 @@ services:
     volumes:
       - /tmp/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
     environment:
-      ROLE_ARN: "your-role-arn"
+      S3_ID_1: "sample-id-1"
+      AWS_BUCKET_1: "aws-bucket-name"
+      FOLDER_PREFIX_1: "bucket-folder-prefix-1"
+      S3_ID_2: "sample-id-2"
+      FOLDER_PREFIX_2: "bucket-folder-prefix-2"
+      AWS_BUCKET_2: "aws-bucket-name"
+      ROLE_ARN: "other-account-role-arn"
       AWS_REGION: "aws-region"
-      AWS_BUCKET: "your-bucket-name"
-      AWS_ACCESS_KEY_ID: "your-access-key"
-      AWS_SECRET_ACCESS_KEY: "your-secret-access-key"
+      AWS_ACCESS_KEY_ID: "aws_access_key_id"
+      AWS_SECRET_ACCESS_KEY: "aws_secret_access_key"
     networks:
       - otel_network
     depends_on:
@@ -32,4 +37,5 @@ services:
 networks:
   otel_network:
     driver: bridge
+
 

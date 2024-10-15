@@ -1,0 +1,22 @@
+receivers:
+  tcplog/logstash:
+    max_log_size: 10MiB
+    listen_address: "0.0.0.0:2255"
+    attributes: {}
+    resource: {}
+    add_attributes: false
+    operators: []
+
+processors:
+  batch:
+
+exporters:
+  debug:
+    verbosity: detailed
+
+service:
+  pipelines:
+    logs:
+      receivers: [tcplog/logstash]
+      processors: [batch]
+      exporters: [debug]
